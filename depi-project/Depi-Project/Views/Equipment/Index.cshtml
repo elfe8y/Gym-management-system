@@ -1,0 +1,85 @@
+@model List<Equipment>
+
+@{
+    ViewData["Title"] = "Equipment";
+}
+
+<a class="btn btn-outline-success" asp-action="Create">
+    <i class="bi bi-plus"></i> Add Equipment
+</a>
+
+<div class="mt-4">
+    @if (!Model.Any())
+    {
+        <div class="alert alert-warning d-flex align-items-center" role="alert" style="padding: 1rem; border-radius: 0.5rem;">
+            <i class="bi bi-exclamation-triangle" style="font-size: 1.5rem; margin-right: 0.5rem;"></i>
+            <span>No equipment found!</span>
+        </div>
+    }
+    else
+    {
+        <div class="row">
+            @foreach (var equipment in Model)
+            {
+                <div class="col-md-4 mb-4">
+                    <div class="card h-100" style="border: none; border-radius: 15px; background-color: #f8f9fa; box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1); transition: transform 0.3s;">
+                        <div class="card-body text-center" style="color: #495057;">
+                            <h5 class="card-title" style="color: #007bff; font-weight: bold;">@equipment.Equipment_Name</h5>
+                            <p class="card-text">
+                                <i class="bi bi-calendar" style="margin-right: 5px; color: #28a745;"></i>
+                                <strong>Maintenance Date:</strong> @equipment.Maintainance_Date<br>
+                                <i class="bi bi-info-circle" style="margin-right: 5px; color: #dc3545;"></i>
+                                <strong>Status:</strong> @equipment.Status
+                            </p>
+                        </div>
+                        <div class="card-footer" style="background-color: #e9ecef; border-top: none; text-align: center;">
+                            <small class="text-muted">Equipment ID: @equipment.Equipment_Id</small>
+                            <div class="mt-2">
+                                <a asp-action="Edit" asp-route-id="@equipment.Equipment_Id" class="btn btn-sm btn-outline-primary" style="margin-right: 10px;">
+                                    <i class="bi bi-pencil"></i> Edit
+                                </a>
+                                <a asp-action="Delete" asp-route-id="@equipment.Equipment_Id" class="btn btn-sm btn-outline-danger" onclick="return confirm('Are you sure you want to delete this item?');">
+                                    <i class="bi bi-trash"></i> Delete
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            }
+        </div>
+
+        <!-- Pagination Controls -->
+        <nav aria-label="Page navigation">
+            <ul class="pagination justify-content-center">
+                @if (ViewBag.CurrentPage > 1)
+                {
+                    <li class="page-item">
+                        <a class="page-link" asp-action="Index" asp-route-page="@(ViewBag.CurrentPage - 1)" tabindex="-1">Previous</a>
+                    </li>
+                }
+
+                @for (int i = 1; i <= ViewBag.TotalPages; i++)
+                {
+                    <li class="page-item @(ViewBag.CurrentPage == i ? "active" : "")">
+                        <a class="page-link" asp-action="Index" asp-route-page="@i">@i</a> <!-- Correctly passing page number here -->
+                    </li>
+                }
+
+                @if (ViewBag.CurrentPage < ViewBag.TotalPages)
+                {
+                    <li class="page-item">
+                        <a class="page-link" asp-action="Index" asp-route-page="@(ViewBag.CurrentPage + 1)">Next</a>
+                    </li>
+                }
+            </ul>
+        </nav>
+
+    }
+</div>
+
+<style>
+    .card:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
+    }
+</style>

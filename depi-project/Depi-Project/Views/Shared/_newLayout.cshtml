@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="~/css/all.min.css" />
+    <link rel="stylesheet" href="~/css/style.css" />
+    <link href="~/lib/bootstrap-icons/font/bootstrap-icons.min.css" rel="stylesheet" />
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="~/css/site.css" />
+
+       <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
+    <link rel="stylesheet" href="~/Depi_Project.styles.css" asp-append-version="true" />
+
+
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+
+     <!-- SweetAlert2 CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/sweetalert2@11.6.10/dist/sweetalert2.min.css" rel="stylesheet">
+
+    <!-- SweetAlert2 JS -->
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.6.10/dist/sweetalert2.all.min.js"></script>
+
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
+    <link rel="stylesheet" href="~/WebApplication1.styles.css" asp-append-version="true" />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;500&display=swap"
+      rel="stylesheet"
+    />
+    <title>@ViewData["Title"] - Gym Management System </title>
+  </head>
+  <body>
+    <div class="loader">
+      <h1>Loading<span>....</span></h1>
+    </div>
+    <div class="page-content index-page">
+      <div class="sidebar">
+        <div class="brand">
+            
+          <i class="fa-solid fa-xmark xmark"></i>
+          <h3 class="brand-name">Gym Management System </h3>
+          
+        </div>
+        
+        <ul>
+
+          @if(!User.Identity.IsAuthenticated){
+            <li>
+            <a asp-controller="Account" asp-action="Register" class="sidebar-link">
+              <i class="fa-solid fa-user"></i>
+              <span>Register</span>
+            </a>
+          </li>
+          <li>
+            <a asp-controller="Account" asp-action="Login" class="sidebar-link">
+              <i class="fa-solid fa-right-to-bracket"></i>
+              <span>Login</span>
+            </a>
+          </li>
+          }else{
+
+            <li>
+            <a asp-controller="Home" asp-action="Index" class="sidebar-link">
+              <i class="fa-solid fa-user-tie"></i>
+              <span> Welcome @User.Identity.Name</span>
+            </a>
+          </li>
+          <li>
+            <a asp-controller="Home" asp-action="Index" class="sidebar-link">
+              <i class="fa-solid fa-house"></i>
+              <span>Dashboard</span>
+            </a>
+          </li>
+
+          <li>
+            <a asp-controller="Employee" asp-action="Index" class="sidebar-link">
+            <i class="fa-solid fa-user-group"></i>
+              <span>Employees</span>
+            </a>
+          </li>
+
+           <li>
+            <a asp-controller="Department" asp-action="Index" class="sidebar-link">
+              <i class="fa-solid fa-user-group"></i>
+              <span>Departments</span>
+            </a>
+          </li>
+
+          <li>
+              <a asp-controller="Equipment" asp-action="Index" class="sidebar-link">
+              <i class="fa-solid fa-dumbbell"></i>
+              <span> Equipments </span>
+            </a>
+          </li>
+          
+          <li>
+            <a asp-controller="Trainee" asp-action="Index" class="sidebar-link">
+            <i class="fa-solid fa-user-group"></i>
+              <span> Trainees</span>
+            </a>
+          </li>
+          <li>
+            <a asp-controller="Subscription" asp-action="index" class="sidebar-link">
+              <i class="fa-solid fa-money-bill"></i>
+              <span> Subscriptions</span>
+            </a>
+          </li>
+          <li>
+            <a asp-controller="Account" asp-action="LogOut" class="sidebar-link">
+              <i class="fa-solid fa-right-from-bracket"></i>
+              <span>Log Out</span>
+            </a>
+          </li>
+          }
+          <!-- ... other menu items with asp-controller and asp-action ... -->
+
+        </ul>
+      </div>
+      <main>
+        <div class="header">
+          <i class="fa-solid fa-bars bar-item"></i>
+          <div class="search">
+            <form asp-action="#" asp-controller="#">
+            <input type="number" name="id" value=""  />
+            <input type="submit" class="btn btn-danger" style="padding: 10 px; margin: 5 px;">
+            </form>
+          </div>
+
+          <div class="profile">
+            <span class="bell"><i class="fa-regular fa-bell fa-lg"></i></span>
+
+            <img src="~/images/avatar.png" alt="No Image" />
+          </div>
+        </div>
+        <div class="main-content">
+          <div class="title">
+            <h1>@ViewData["Title"]</h1>
+          </div>
+          <div class="container">
+            <main role="main" class="pb-3">
+              @RenderBody()
+            </main>
+          </div>
+        </div>
+      </main>
+    </div>
+    
+    <script src="~/js/script.js"></script>
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="~/js/site.js" asp-append-version="true"></script>
+    @await RenderSectionAsync("Scripts", required: false)
+  </body>
+</html>

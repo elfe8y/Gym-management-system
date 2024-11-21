@@ -1,0 +1,38 @@
+
+@model List<Subscription> 
+
+<a href="/Subscription/addSubscription" class="btn btn-danger">New Subscription</a>
+
+<table class="table table-bordered table-hover">
+    <tr>
+        <td>Subscription Id</td>
+        <td>Name</td>
+        <td>Price</td>
+        <td>Description</td>
+        <td> Action</td>
+
+    </tr>
+@foreach(var item in @Model)
+    {
+        <tr>
+            <td>@item.Subscription_Id</td>
+            <td>@item.Name</td>
+            <td>@item.price</td>
+            <td>@item.Description</td>
+            <td>
+                
+                
+            <a href="Subscription/DeleteSub/@item.Subscription_Id" class="btn btn-danger" style="margin:10px;">Delete</a>
+               
+            <a href="/Subscription/UpdateSubscrtiption/@item.Subscription_Id" class="btn btn-warning" >Edit</a>
+
+            </td>
+           
+                                          
+            
+        </tr>
+    }
+
+</table>
+
+

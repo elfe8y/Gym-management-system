@@ -1,0 +1,51 @@
+
+@model List<Trainee> 
+
+<a href="/Trainee/createTrainee" class="btn btn-danger">New Trainee</a>
+
+<table class="table table-bordered table-hover">
+    <tr>
+        <td>Trainee Id</td>
+        <td>Name</td>
+        <td>Age</td>
+        <td>PhoneNumber</td>
+        <td>Address</td>
+        <td>Start date</td>
+        <td>end date</td>
+        <td> type of Subscription</td>
+        <td> Action</td>
+
+    </tr>
+@foreach(var item in @Model)
+    {
+        <tr>
+            <td>@item.Trainee_Id</td>
+            <td>@item.Name</td>
+            <td>@item.Age</td>
+            <td>@item.PhoneNumber</td>
+            <td>@item.Address</td>
+            <td>@item.Start_Of_Subscription</td>
+            <td>@item.End_Of_Subscription</td>
+            <td>@foreach(var sub in ViewBag.sub){
+                    if(@item.type_Of_Subscription == sub.Subscription_Id){
+                        @sub.Name
+                    }
+                }
+            </td>
+            <td>
+                
+                
+            <a href="Trainee/DeleteTrainee/@item.Trainee_Id" class="btn btn-danger">Delete</a>
+               
+            <a href="/Trainee/UpdateTrainee/@item.Trainee_Id" class="btn btn-warning" >Edit</a>
+
+            </td>
+           
+                                          
+            
+        </tr>
+    }
+
+</table>
+
+

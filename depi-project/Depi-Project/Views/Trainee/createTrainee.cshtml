@@ -1,0 +1,84 @@
+@model Trainee
+
+
+
+<div class="container mt-5">
+    <div class="row justify-content-center">
+        <div class="col-md-6">
+            <div class="card p-4 shadow-lg rounded" style="border-radius: 12px; background-color: #f9f9f9; border: none;">
+                <div class="card-body text-center">
+                    <h3 class="card-title" style="font-weight: 600; color: #2c3e50;">@ViewData["Title"]</h3>
+                    <p class="text-muted mb-4">Trainee</p>
+
+                    <form method="POST" asp-action="addTrainee" asp-controller="Trainee">
+                       
+
+                       
+                        <div class="form-group mb-4">
+                            <label asp-for="Name" class="form-label">Trainee Name</label>
+                            <input type="text" asp-for="Name" class="form-control shadow-sm"  style="border-radius: 8px; border: 1px solid #ccc; padding: 10px;" />
+                            <span asp-validation-for="Name" class="text-danger"></span>
+                        </div>
+
+                         <div class="form-group mb-4">
+                            <label asp-for="Age" class="form-label">Trainee Age</label>
+                            <input type="text" asp-for="Age" class="form-control shadow-sm"  style="border-radius: 8px; border: 1px solid #ccc; padding: 10px;" />
+                            <span asp-validation-for="Age" class="text-danger"></span>
+                        </div>
+
+                         <div class="form-group mb-4">
+                            <label asp-for="PhoneNumber" class="form-label">Trainee PhoneNumber</label>
+                            <input type="text" asp-for="PhoneNumber" class="form-control shadow-sm"  style="border-radius: 8px; border: 1px solid #ccc; padding: 10px;" />
+                            <span asp-validation-for="PhoneNumber" class="text-danger"></span>
+                        </div>
+
+                        <div class="form-group mb-4">
+                            <label asp-for="Address" class="form-label">Trainee Address</label>
+                            <input type="text" asp-for="Address" class="form-control shadow-sm"  style="border-radius: 8px; border: 1px solid #ccc; padding: 10px;" />
+                            <span asp-validation-for="Address" class="text-danger"></span>
+                        </div>
+                        
+                        <div class="form-group mb-4">
+                            <label asp-for="Start_Of_Subscription" class="form-label">Trainee start date</label>
+                            <input type="date" asp-for="Start_Of_Subscription" class="form-control shadow-sm"  style="border-radius: 8px; border: 1px solid #ccc; padding: 10px;" />
+                            <span asp-validation-for="Start_Of_Subscription" class="text-danger"></span>
+                        </div>
+                        
+                        
+                        <div class="form-group mb-4">
+                            <label asp-for="End_Of_Subscription" class="form-label">Trainee End date</label>
+                            <input type="date" asp-for="End_Of_Subscription" class="form-control shadow-sm"  style="border-radius: 8px; border: 1px solid #ccc; padding: 10px;" />
+                            <span asp-validation-for="End_Of_Subscription" class="text-danger"></span>
+                        </div>
+
+                        
+
+                         <div class="form-group mb-4">
+    <label asp-for="type_Of_Subscription" class="form-label">Subscription</label>
+    <select class="form-select" asp-for="type_Of_Subscription" id="type_Of_Subscription" required>
+        <option value="">Select a Subscription</option>
+        @foreach (var sub in ViewBag.sub)
+        {
+            <option value="@sub.Subscription_Id">@sub.Name</option>
+        }
+    </select>
+    <span asp-validation-for="type_Of_Subscription" class="text-danger"></span>
+</div>
+
+
+                        <!-- Buttons -->
+                        <div class="d-flex justify-content-between">
+                            <button type="submit" class="btn btn-primary" style="background-color: #3498db; border-radius: 50px; padding: 10px 20px; font-weight: 600;">
+                                <i class="bi bi-check-circle"></i> Save
+                            </button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    @await Html.PartialAsync("_ValidationScriptsPartial")
+}

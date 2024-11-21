@@ -1,0 +1,69 @@
+@model Trainee
+
+@{
+    ViewBag.Title = "Update Trainee";
+}
+
+<h2>Update Subscription</h2>
+
+@if (Model != null)
+{
+<form asp-action="EditTrainee" asp-controller="Trainee" method="post">
+
+    <input name="Trainee_Id" value="@Model.Trainee_Id" hidden />
+    <div class="form-group">
+        <label for="name">Name:</label>
+        <input type="text" id="name" name="Name" class="form-control" value="@Model.Name" required />
+    </div>
+
+     <div class="form-group">
+        <label for="Age">Age:</label>
+        <input type="text" id="Age" name="Age" class="form-control" value="@Model.Age" required />
+    </div>
+
+     <div class="form-group">
+        <label for="PhoneNumber">PhoneNumber:</label>
+        <input type="text" id="PhoneNumber" name="PhoneNumber" class="form-control" value="@Model.PhoneNumber" required />
+    </div>
+
+    <div class="form-group">
+        <label for="Address">Address:</label>
+        <input type="text" id="Address" name="Address" class="form-control" value="@Model.Address" required />
+    </div>
+
+    <div class="form-group">
+        <label for="Start_Of_Subscription">Start Date</label>
+        <input type="text" id="Start_Of_Subscription" name="Start_Of_Subscription" class="form-control" value="@Model.Start_Of_Subscription" required />
+    </div>
+
+    <div class="form-group">
+        <label for="End_Of_Subscription">End Date</label>
+        <input type="text" id="End_Of_Subscription" name="End_Of_Subscription" class="form-control" value="@Model.End_Of_Subscription" required />
+    </div>
+
+     <div class="form-group">
+    <label asp-for="type_Of_Subscription" class="form-label">Subscription</label>
+    <select class="form-select" asp-for="type_Of_Subscription" id="type_Of_Subscription" required>
+        <option value="">Select a Subscription</option>
+        @foreach (var sub in ViewBag.sub)
+        {
+            if(@sub.Subscription_Id == @Model.type_Of_Subscription){
+                <option value="@sub.Subscription_Id" selected>@sub.Name</option>
+            }else{
+                <option value="@sub.Subscription_Id">@sub.Name</option>
+            }
+            
+        }
+    </select>
+    <span asp-validation-for="type_Of_Subscription" class="text-danger"></span>
+</div>
+
+    <div class="form-group">
+        <button type="submit" class="btn btn-primary">Update </button>
+    </div>
+</form>
+}
+else
+{
+<p>Subscription not found!</p>
+}
